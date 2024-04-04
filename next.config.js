@@ -10,9 +10,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "api.zora.co",
+        //hostname: "api.zora.co",
+        hostname: "nouns.build",
         port: "",
-        pathname: "/renderer/**",
+        pathname: "/api/renderer/**",
       },
     ],
   },

@@ -56,7 +56,7 @@ export default function Hero() {
         {tokenInfo && (
           <div className="w-full h-auto flex items-center justify-around">
             <Image
-              src={tokenInfo.image}
+              src={tokenInfo.image.replace("api.zora.co", "nouns.build/api")}
               onLoad={() => setImageLoaded(true)}
               height={450}
               width={450}
