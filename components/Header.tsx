@@ -33,7 +33,7 @@ export default function Header() {
       <div className="flex items-center justify-between w-full px-6 py-8 xl:w-[1200px]">
         <div className="flex items-center z-20">
           <Link href={"/"} className="flex items-center mr-2 sm:mr-4">
-            {theme.brand.logo !== null && contractInfo?.image && (
+            {/*theme.brand.logo !== null && contractInfo?.image && (
               <Image
                 src={theme.brand.logo || contractInfo?.image}
                 height={90}
@@ -42,10 +42,10 @@ export default function Header() {
                 alt="logo"
                 className="object-scale-down w-auto"
               />
-            )}
+            )*/}
             {theme.brand.title !== null && contractInfo?.name && (
               <div
-                className={`ml-4 text-skin-base font-bold text-xl ${
+                className={`ml-4 text-skin-base font-bold text-3xl font-heading ${
                   !onlyTitle && "hidden sm:block"
                 } `}
               >
@@ -58,7 +58,7 @@ export default function Header() {
             rel="noreferer noopener noreferrer"
             target="_blank"
             href={`${ETHERSCAN_BASEURL}/address/${addresses?.treasury}`}
-            className="ml-4 border hover:bg-skin-backdrop transition ease-in-out hover:scale-110 font-semibold rounded-xl px-6 h-10 flex items-center justify-around text-skin-muted border-skin-stroke"
+            className="ml-4 border hover:bg-skin-button-accent-hover transition ease-in-out hover:scale-110 font-semibold rounded-xl px-6 h-10 flex items-center justify-around text-skin-base border-skin-stroke text-xl"
           >
             Ξ {treasury ? formatTreasuryBalance(treasury) : "0"}
           </Link>
@@ -69,10 +69,10 @@ export default function Header() {
             <NavigationItemsComponent
               key={i}
               item={item}
-              className="mr-4 border hover:bg-skin-backdrop transition ease-in-out hover:scale-110 font-semibold rounded-xl px-6 h-10 flex items-center justify-around text-skin-muted border-skin-stroke"
+              className="mr-4 border hover:bg-skin-button-accent-hover transition ease-in-out hover:scale-110 font-semibold rounded-xl px-6 h-10 flex items-center justify-around text-skin-base border-skin-stroke text-xl"
             />
           ))}
-          <CustomConnectButton className="bg-skin-backdrop px-6 h-10 rounded-xl border border-skin-stroke text-skin-base transition ease-in-out hover:scale-110" />
+          <CustomConnectButton className="bg-skin-backdrop hover:bg-skin-button-accent-hover px-6 h-10 rounded-xl border border-skin-stroke text-skin-base transition ease-in-out hover:scale-110 text-xl" />
         </div>
 
         <button onClick={() => setShowMobile((x) => !x)} className="sm:hidden">

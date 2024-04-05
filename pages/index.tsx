@@ -1,3 +1,6 @@
+
+import Image from "next/image";
+import cobrinha from "../public/cobrinha.png";
 import Header from "../components/Header";
 import { useIsMounted } from "hooks/useIsMounted";
 import { Fragment } from "react";
@@ -131,6 +134,7 @@ export default function SiteComponent({
             <Hero />
           </div>
         </div>
+        <Image src={cobrinha} alt="cobrinha divisora" priority={true} style={{width: '100%'}}/>
         <div className="max-w-[1400px] w-full">
           <div>
             <div className="bg-skin-backdrop lg:px-24 xl:px-52 mt-8">
