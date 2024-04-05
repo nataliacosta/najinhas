@@ -3,6 +3,7 @@ const IPFS_GATEWAY =
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: "/najinhas",
   reactStrictMode: true,
   swcMinify: true,
   images: {
