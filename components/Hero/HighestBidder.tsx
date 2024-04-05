@@ -12,14 +12,14 @@ export const HighestBidder = ({ address }: { address?: `0x${string}` }) => {
 
   return (
     <div className="flex items-center flex-wrap justify-between w-full mt-6 sm:border-b border-skin-stroke pb-4">
-      <div className="text-skin-muted">
+      <div className="text-skin-muted text-xl">
         {theme.strings.highestBidder || "Highest Bidder"}
       </div>
 
       <div className="flex items-center">
         <div className="flex items-center mt-2">
           <UserAvatar className="h-6 rounded-full mr-2" address={address} />
-          <div className="font-semibold text-skin-base">
+          <div className="font-semibold text-skin-base ">
             {ensName || shortenAddress(address)}
           </div>
         </div>
