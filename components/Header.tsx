@@ -58,7 +58,7 @@ export default function Header() {
             rel="noreferer noopener noreferrer"
             target="_blank"
             href={`${ETHERSCAN_BASEURL}/address/${addresses?.treasury}`}
-            className="ml-4 border hover:bg-skin-backdrop transition ease-in-out hover:scale-110 font-semibold rounded-xl px-6 h-10 flex items-center justify-around text-skin-muted border-skin-stroke"
+            className="ml-4 border hover:bg-skin-button-accent-hover transition ease-in-out hover:scale-110 font-semibold rounded-xl px-6 h-10 flex items-center justify-around text-skin-base border-skin-stroke"
           >
             Ξ {treasury ? formatTreasuryBalance(treasury) : "0"}
           </Link>
@@ -69,10 +69,10 @@ export default function Header() {
             <NavigationItemsComponent
               key={i}
               item={item}
-              className="mr-4 border hover:bg-skin-backdrop transition ease-in-out hover:scale-110 font-semibold rounded-xl px-6 h-10 flex items-center justify-around text-skin-muted border-skin-stroke"
+              className="mr-4 border hover:bg-skin-button-accent-hover transition ease-in-out hover:scale-110 font-semibold rounded-xl px-6 h-10 flex items-center justify-around text-skin-base border-skin-stroke"
             />
           ))}
-          <CustomConnectButton className="bg-skin-backdrop px-6 h-10 rounded-xl border border-skin-stroke text-skin-base transition ease-in-out hover:scale-110" />
+          <CustomConnectButton className="bg-skin-backdrop hover:bg-skin-button-accent-hover px-6 h-10 rounded-xl border border-skin-stroke text-skin-base transition ease-in-out hover:scale-110" />
         </div>
 
         <button onClick={() => setShowMobile((x) => !x)} className="sm:hidden">
