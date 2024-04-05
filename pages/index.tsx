@@ -138,7 +138,7 @@ export default function SiteComponent({
         <div className="max-w-[1400px] w-full">
           <div>
             <div className="bg-skin-backdrop lg:px-24 xl:px-52 mt-8">
-              <div className="h-full w-full wrapper focus:outline-none pt-12 p-6 break-words prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
+              <div className="h-full w-full wrapper focus:outline-none pt-12 p-6 break-words text-4xl prose prose-skin prose-headings:font-heading max-w-none text-pink">
                 <MDXRemote {...descriptionSource} />
               </div>
 
@@ -151,7 +151,7 @@ export default function SiteComponent({
                       }
                       title={x.frontmatter?.title || ""}
                     >
-                      <div className="prose prose-skin prose-headings:font-heading break-words max-w-none mt-8">
+                      <div className="prose prose-skin prose-headings:font-heading break-words max-w-none mt-8 text-2xl">
                         <MDXRemote {...x} />
                       </div>
                     </FaqElement>

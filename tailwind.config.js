@@ -22,6 +22,7 @@ module.exports = {
           base: withOpacity("--color-text-base"),
           muted: withOpacity("--color-text-muted"),
           inverted: withOpacity("--color-text-inverted"),
+          pink: withOpacity("--color-text-pink"),
         },
       },
       textColor: {

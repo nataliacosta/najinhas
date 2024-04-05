@@ -18,6 +18,7 @@ export const theme: ThemeConfig = merge(lightTheme, {
       "text-muted": `115, 210, 222`,
       "text-inverted": `143, 45, 86`,
       "text-highlighted": `251, 177, 70`,
+      "text-pink": `216, 17, 89`,
       "button-accent": `33, 131, 128`,
       "button-accent-hover": `251, 177, 60`,
       "button-muted": `216, 17, 89`,
