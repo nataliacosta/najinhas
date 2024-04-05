@@ -17,10 +17,14 @@ export const theme: ThemeConfig = merge(lightTheme, {
       "text-base": `255, 255, 255`,
       "text-muted": `115, 210, 222`,
       "text-inverted": `143, 45, 86`,
-      "text-highlighted": `216, 17, 89`,
+      "text-highlighted": `251, 177, 70`,
       "button-accent": `33, 131, 128`,
       "button-accent-hover": `251, 177, 60`,
-      "button-muted": `216, 17, 89`
+      "button-muted": `216, 17, 89`,
+      "proposal-success": `141, 224, 58`,
+      "proposal-danger": `232, 46, 59`,
+      "proposal-muted": `216, 17, 89`,
+      "proposal-highlighted": `251, 177, 70`,
     }
   },
   nav: {
