@@ -16,6 +16,7 @@ const nextConfig = {
         pathname: "/api/renderer/**",
       },
     ],
+    unoptimized: true,
   },
   async rewrites() {
     return [
