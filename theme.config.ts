@@ -5,7 +5,7 @@ import merge from "lodash.merge";
 export const theme: ThemeConfig = merge(lightTheme, {
   styles: {
     fonts: {
-      heading: "Roboto",
+      heading: "Londrina Solid",
     },
   },
   nav: {
@@ -14,5 +14,5 @@ export const theme: ThemeConfig = merge(lightTheme, {
       { label: "About", href: "/about" },
     ],
     secondary: [],
-  },
+  }
 } as Partial<ThemeConfig>);
