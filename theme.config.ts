@@ -6,6 +6,7 @@ export const theme: ThemeConfig = merge(lightTheme, {
   styles: {
     fonts: {
       heading: "Londrina Solid",
+      nouns: "Londrina Solid"
     },
   },
   nav: {
