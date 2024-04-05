@@ -3,6 +3,7 @@ export const ETHERSCAN_BASEURL = {
   "5": "https://goerli.etherscan.io",
   "999": "https://explorer.zora.energy/",
   "7777777": "https://testnet.explorer.zora.energy/",
+  "8453": "https://basescan.org/"
 }[process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1"];
 
 export const ETHER_ACTOR_BASEURL = "https://ether.actor";

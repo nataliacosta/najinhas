@@ -57,7 +57,7 @@ export default function Header() {
           <Link
             rel="noreferer noopener noreferrer"
             target="_blank"
-            href={`${ETHERSCAN_BASEURL}/tokenholdings?a=${addresses?.treasury}`}
+            href={`${ETHERSCAN_BASEURL}/address/${addresses?.treasury}`}
             className="ml-4 border hover:bg-skin-backdrop transition ease-in-out hover:scale-110 font-semibold rounded-xl px-6 h-10 flex items-center justify-around text-skin-muted border-skin-stroke"
           >
             Ξ {treasury ? formatTreasuryBalance(treasury) : "0"}

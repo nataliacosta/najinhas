@@ -18,7 +18,7 @@ export const RPC_URL = {
   "5": `https://eth-goerli.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
   "999": "https://testnet.rpc.zora.energy",
   "7777777": "https://rpc.zora.energy",
-  "8453": "https://mainnet.base.org",
+  "8453": `https://base-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
 }[process.env.NEXT_PUBLIC_TOKEN_NETWORK ?? "1"]!;
 
 export type ChainId = "1" | "5" | "999" | "7777777" | "8453";
