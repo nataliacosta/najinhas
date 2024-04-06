@@ -45,6 +45,7 @@ export default function Vote({
   const { data: proposals } = useGetAllProposals({
     governorContract: addresses?.governor,
   });
+  console.log("proposals: ", proposals);
   const { data: treasuryBalance } = useTreasuryBalance({
     treasuryContract: addresses?.treasury,
   });
@@ -61,7 +62,7 @@ export default function Vote({
   return (
     <Layout>
       <div className="text-2xl relative font-heading text-skin-muted">
-        Governance
+        Governança
       </div>
 
       <div className="h-full w-full wrapper focus:outline-none pt-4 break-words prose prose-skin prose-headings:font-heading lg:prose-xl max-w-none">
@@ -76,33 +77,34 @@ export default function Vote({
           </div>
         </div>
         <div className="sm:w-1/3 mt-4 sm:mt-0 sm:border-l border-skin-stroke sm:pl-6 h-full flex items-center text-skin-muted">
-          This treasury exists for DAO participants to allocate resources for
-          the long-term growth and prosperity of the project.
+          Esse tesouro existe para participantes da DAO alocarem recursos para o crescimento e prosperidade a longo prazo do projeto.
         </div>
       </div>
 
       <div className="mt-12">
         <div className="flex items-center justify-between">
-          <div className="text-4xl font-heading text-skin-base">Proposals</div>
+          <div className="text-4xl font-heading text-skin-base">Propostas</div>
           {userVotes && userVotes >= (currentThreshold || 0) ? (
             <Link
               href={"/create-proposal"}
               className="text-sm bg-skin-muted hover:bg-skin-button-accent-hover hover:text-skin-inverted text-skin-muted w-36 h-8 rounded-lg flex items-center justify-around"
             >
-              Submit proposal
+              Enviar proposta
             </Link>
           ) : (
             <Fragment />
           )}
         </div>
         <div>
-          {proposals?.map((x, i) => (
-            <ProposalPlacard
-              key={i}
-              proposal={x}
-              proposalNumber={getProposalNumber(i)}
-            />
-          ))}
+          { (proposals && proposals.length > 0) ?
+             proposals?.map((x, i) => (
+              <ProposalPlacard
+                key={i}
+                proposal={x}
+                proposalNumber={getProposalNumber(i)}
+              />
+            ))
+          : "Ainda não temos propostas :("}
         </div>
       </div>
     </Layout>

@@ -31,6 +31,7 @@ export const theme: ThemeConfig = merge(lightTheme, {
   nav: {
     primary: [
       { label: "Ponziverso", href: "https://ponziverso.com" },
+      { label: "Vote", href: "/vote" },
       /*{ label: "About", href: "/about" },*/
     ],
     secondary: [],
