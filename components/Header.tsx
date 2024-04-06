@@ -45,9 +45,7 @@ export default function Header() {
             )*/}
             {theme.brand.title !== null && contractInfo?.name && (
               <div
-                className={`ml-4 text-skin-base font-bold text-3xl font-heading ${
-                  !onlyTitle && "hidden sm:block"
-                } `}
+                className={`ml-4 text-skin-base font-bold text-3xl font-heading  `}
               >
                 {theme.brand.title || contractInfo?.name}
               </div>
