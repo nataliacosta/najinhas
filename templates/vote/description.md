@@ -1,3 +1,3 @@
-# My DAO Governance
+# Governança da Najinhas
 
-Edit your voting description in the `templates/vote/description.md` file
+Cria uma proposta aí, doidão...
