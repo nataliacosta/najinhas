@@ -190,7 +190,7 @@ export default function ProposalComponent() {
       </div>
 
       <div className="text-2xl font-heading text-skin-base mt-8 font-bold">
-        Proposed Transactions
+        Transações propostas
       </div>
 
       <div className="mt-4 max-w-[75vw]">
