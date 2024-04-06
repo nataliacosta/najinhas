@@ -80,7 +80,7 @@ export const PlaceBid = ({
                 ? "bg-skin-button-accent transition ease-in-out hover:scale-110"
                 : "bg-skin-button-accent hover:bg-skin-button-accent-hover"
               : "bg-skin-button-muted"
-          } text-skin-inverted rounded-lg text-xl w-full sm:h-auto h-12 mt-4 sm:mt-0 sm:w-40 flex items-center justify-around`}
+          } text-skin-base rounded-lg text-xl w-full sm:h-auto h-12 mt-4 sm:mt-0 sm:w-40 flex items-center justify-around`}
         >
           {isLoading ? (
             <Image src="/spinner.svg" height={24} width={24} alt="spinner" />

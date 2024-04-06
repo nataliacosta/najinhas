@@ -17,3 +17,11 @@
     -moz-appearance: textfield;
   }
 }
+
+.youtubeVideo {
+  max-width: 100%;
+}
+
+.youtubeVideo iframe {
+  max-width: 100%;
+}
