@@ -9,13 +9,14 @@ import { HighestBidder } from "./HighestBidder";
 import { Fragment, useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
-import { AuctionInfo } from "@/services/nouns-builder/auction";
+import { AuctionInfo, getBidHistory } from "@/services/nouns-builder/auction";
 import { ContractInfo } from "@/services/nouns-builder/token";
 import { usePreviousAuctions } from "@/hooks/fetch/usePreviousAuctions";
 import { useEnsName } from "wagmi";
 import { shortenAddress } from "@/utils/shortenAddress";
 import UserAvatar from "../UserAvatar";
 import { useRouter } from "next/router";
+import BidHistory from "./BidHistory";
 
 export default function Hero() {
   const { data: contractInfo } = useContractInfo();
@@ -150,34 +151,37 @@ const EndedAuction = ({
   });
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mt-10 lg:w-96 pb-8 lg:pb-0">
-      <div className="lg:border-r mr-8 lg:mr-0 border-skin-stroke">
-        <div className="text-lg text-skin-muted">{"Winning Bid"}</div>
-        {auctionData ? (
-          <div className="text-2xl font-semibold sm:text-3xl text-skin-base mt-2">
-            Ξ {utils.formatEther(auctionData.amount || "0")}
-          </div>
-        ) : (
-          <div className="text-2xl font-semibold sm:text-3xl text-skin-base mt-2">
-            n/a
-          </div>
-        )}
-      </div>
-      <div className="lg:w-64">
-        <div className="text-lg text-skin-muted">{"Held by"}</div>
+    <Fragment>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mt-10 lg:w-96 pb-8 lg:pb-0">
+        <div className="lg:border-r mr-8 lg:mr-0 border-skin-stroke">
+          <div className="text-lg text-skin-muted">{"Winning Bid"}</div>
+          {auctionData ? (
+            <div className="text-2xl font-semibold sm:text-3xl text-skin-base mt-2">
+              Ξ {utils.formatEther(auctionData.amount || "0")}
+            </div>
+          ) : (
+            <div className="text-2xl font-semibold sm:text-3xl text-skin-base mt-2">
+              n/a
+            </div>
+          )}
+        </div>
+        <div className="lg:w-64">
+          <div className="text-lg text-skin-muted">{"Held by"}</div>
 
-        <div className="flex items-center mt-2">
-          <UserAvatar
-            diameter={32}
-            className="w-8 h-8 rounded-full mr-2"
-            address={owner || ethers.constants.AddressZero}
-          />
-          <div className="text-xl font-semibold sm:text-3xl text-skin-base">
-            {ensName || shortenAddress(owner || ethers.constants.AddressZero)}
+          <div className="flex items-center mt-2">
+            <UserAvatar
+              diameter={32}
+              className="w-8 h-8 rounded-full mr-2"
+              address={owner || ethers.constants.AddressZero}
+            />
+            <div className="text-xl font-semibold sm:text-3xl text-skin-base">
+              {ensName || shortenAddress(owner || ethers.constants.AddressZero)}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <BidHistory bids={auctionData?.bids} />
+    </Fragment>
   );
 };
 
@@ -227,11 +231,13 @@ const CurrentAuction = ({
         />
       )}
 
-      {auctionInfo?.highestBidder &&
+      {/*auctionInfo?.highestBidder &&
         !compareAddress(
           auctionInfo?.highestBidder,
           ethers.constants.AddressZero
-        ) && <HighestBidder address={auctionInfo?.highestBidder} />}
+        ) && <HighestBidder address={auctionInfo?.highestBidder} />*/}
+
+        <BidHistory bids={auctionInfo?.bids} />
     </Fragment>
   );
 };
