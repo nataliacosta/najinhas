@@ -14,7 +14,7 @@ export const WalletInfo = ({ address }: { address?: `0x${string}` }) => {
     <div className="flex items-center">
     <div className="flex items-center mt-2">
         <UserAvatar className="h-6 rounded-full mr-2" address={address} />
-        <div className="font-semibold text-skin-base ">
+        <div className="text-skin-base ">
         {ensName || shortenAddress(address)}
         </div>
     </div>

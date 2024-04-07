@@ -18,6 +18,9 @@ import UserAvatar from "../UserAvatar";
 import { useRouter } from "next/router";
 import BidHistory from "./BidHistory";
 
+// number of bids in history before full history button
+const bidsShow = 2;
+
 export default function Hero() {
   const { data: contractInfo } = useContractInfo();
   const { data: auctionInfo } = useCurrentAuctionInfo({
@@ -62,10 +65,10 @@ export default function Hero() {
               height={450}
               width={450}
               alt="logo"
-              className={`rounded-md object-scale-down relative z-20 w-100 h-100 lg:h-[65vh] lg:max-h-[500px] ${
+              className={`rounded-md object-scale-down relative z-20 w-100 h-100  ${
                 imageLoaded ? "visible" : "invisible"
               }`}
-            />
+            priority />
           </div>
         )}
         <div
@@ -119,12 +122,16 @@ export default function Hero() {
             auctionInfo={auctionInfo}
             contractInfo={contractInfo}
             tokenId={currentTokenId}
+            tokenImg={tokenInfo?.image || ""}
+            tokenName={tokenInfo?.name || ""}
           />
         ) : (
           <EndedAuction
             auctionContract={contractInfo?.auction}
             tokenId={tokenId}
             owner={tokenInfo?.owner}
+            tokenImg={tokenInfo?.image || ""}
+            tokenName={tokenInfo?.name || ""}
           />
         )}
       </div>
@@ -136,10 +143,14 @@ const EndedAuction = ({
   auctionContract,
   tokenId,
   owner,
+  tokenImg,
+  tokenName,
 }: {
   auctionContract?: string;
   tokenId?: string;
   owner?: `0x${string}`;
+  tokenImg: string;
+  tokenName: string;
 }) => {
   const { data } = usePreviousAuctions({ auctionContract });
   const auctionData = data?.find((auction) =>
@@ -180,7 +191,7 @@ const EndedAuction = ({
           </div>
         </div>
       </div>
-      <BidHistory bids={auctionData?.bids} />
+      <BidHistory bids={auctionData?.bids} numToShow={bidsShow} title="Last Bids" imgsrc={tokenImg.replace("api.zora.co", "nouns.build/api")} tokenName={tokenName || "0"} />
     </Fragment>
   );
 };
@@ -189,10 +200,14 @@ const CurrentAuction = ({
   auctionInfo,
   contractInfo,
   tokenId,
+  tokenImg,
+  tokenName,
 }: {
   auctionInfo?: AuctionInfo;
   contractInfo?: ContractInfo;
   tokenId: string;
+  tokenImg: string;
+  tokenName: string;
 }) => {
   const [theme] = useTheme();
 
@@ -237,7 +252,7 @@ const CurrentAuction = ({
           ethers.constants.AddressZero
         ) && <HighestBidder address={auctionInfo?.highestBidder} />*/}
 
-        <BidHistory bids={auctionInfo?.bids} />
+        <BidHistory bids={auctionInfo?.bids} numToShow={bidsShow} title="Last Bids" imgsrc={tokenImg.replace("api.zora.co", "nouns.build/api")} tokenName={tokenName} />
     </Fragment>
   );
 };
