@@ -11,6 +11,7 @@ import {
 import { AuctionABI } from "@buildersdk/sdk";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useTheme } from "@/hooks/useTheme";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
 
 export const PlaceBid = ({
   highestBid,
@@ -40,6 +41,9 @@ export const PlaceBid = ({
   const { isLoading } = useWaitForTransaction({
     hash: data?.hash,
   });
+  
+  const { openConnectModal } = useConnectModal();
+  const { isConnected } = useAccount();
 
   const highestBidBN = BigNumber.from(highestBid);
   const amountIncrease = highestBidBN.div("10");
@@ -69,18 +73,15 @@ export const PlaceBid = ({
           }
         />
         <button
-          disabled={!write}
           onClick={(e) => {
             e.preventDefault();
+            if (isConnected) {
             write?.();
+            } else {
+              openConnectModal?.();
+            }
           }}
-          className={`bg-skin-button-accent ${
-            address
-              ? write
-                ? "bg-skin-button-accent transition ease-in-out hover:scale-110"
-                : "bg-skin-button-accent hover:bg-skin-button-accent-hover"
-              : "bg-skin-button-muted"
-          } text-skin-base rounded-lg text-xl w-full sm:h-auto h-12 mt-4 sm:mt-0 sm:w-40 flex items-center justify-around`}
+          className="bg-skin-button-accent transition ease-in-out hover:scale-110 hover:bg-skin-button-accent-hover text-skin-base rounded-lg text-xl w-full sm:h-auto h-12 mt-4 sm:mt-0 sm:w-40 flex items-center justify-around"
         >
           {isLoading ? (
             <Image src="/spinner.svg" height={24} width={24} alt="spinner" />
