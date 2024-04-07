@@ -1,8 +1,9 @@
-import { useEnsAvatar } from "wagmi";
 import Image from "next/image";
 import getNormalizedURI from "@/utils/getNormalizedURI";
 import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import { IPFS_GATEWAY } from "constants/urls";
+import useEnsAvatar from "@/hooks/fetch/useEnsAvatar";
+import { zeroAddress } from "viem";
 
 export default function UserAvatar({
   address,
@@ -13,17 +14,13 @@ export default function UserAvatar({
   className: string;
   diameter?: number;
 }) {
-  const { data: ensAvatar } = useEnsAvatar({
-    address,
-  });
+  const { data: ensAvatar } = useEnsAvatar(address);
 
-  if (!ensAvatar)
+  if (ensAvatar?.ensAvatar)
     return (
-      <div className={className}>
-        <Jazzicon diameter={diameter} seed={jsNumberForAddress(address)} />
-      </div>
+        <Image alt="avatar" src={ensAvatar.ensAvatar} className={className} height={diameter || 24} width={diameter || 24}/>
     );
-
+/*
   if (ensAvatar.includes("ipfs"))
     return (
       <Image
@@ -36,6 +33,10 @@ export default function UserAvatar({
         width={20}
       />
     );
-
-  return <img alt="avatar" src={ensAvatar} className={className} />;
+*/
+  return (
+    <div className={className}>
+      <Jazzicon diameter={diameter} seed={jsNumberForAddress(address ?? zeroAddress)} />
+    </div>
+  )
 }

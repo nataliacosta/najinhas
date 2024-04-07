@@ -5,6 +5,10 @@ import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { publicProvider } from "wagmi/providers/public";
 import { zoraTestnet, zora, base } from "@wagmi/chains";
 
+
+import { createPublicClient, http } from "viem";
+import { baseSepolia, mainnet as mainnetViem } from "viem/chains";
+
 const selectedChain = {
   "1": mainnet,
   "5": goerli,
@@ -48,4 +52,9 @@ const wagmiClient = createClient({
   provider,
 });
 
-export { wagmiClient, chains };
+const viemMainnetClient = createPublicClient({
+  chain: mainnetViem,
+  transport: http(`https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`),
+});
+
+export { wagmiClient, chains, viemMainnetClient };

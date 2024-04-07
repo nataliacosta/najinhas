@@ -12,14 +12,15 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
 import { AuctionInfo, getBidHistory } from "@/services/nouns-builder/auction";
 import { ContractInfo } from "@/services/nouns-builder/token";
 import { usePreviousAuctions } from "@/hooks/fetch/usePreviousAuctions";
-import { useEnsName } from "wagmi";
 import { shortenAddress } from "@/utils/shortenAddress";
+import { getAddress, size, zeroAddress } from "viem";
+import useEnsName from "@/hooks/fetch/useEnsName";
 import UserAvatar from "../UserAvatar";
 import { useRouter } from "next/router";
 import BidHistory from "./BidHistory";
 
 // number of bids in history before full history button
-const bidsShow = 2;
+const bidsShow = 1;
 
 export default function Hero() {
   const { data: contractInfo } = useContractInfo();
@@ -157,9 +158,7 @@ const EndedAuction = ({
     compareAddress(auction.tokenId, tokenId || "")
   );
 
-  const { data: ensName } = useEnsName({
-    address: owner,
-  });
+  const { data: ensName } = useEnsName(owner);
 
   return (
     <Fragment>
@@ -186,7 +185,7 @@ const EndedAuction = ({
               address={owner || ethers.constants.AddressZero}
             />
             <div className="text-xl font-semibold sm:text-3xl text-skin-base">
-              {ensName || shortenAddress(owner || ethers.constants.AddressZero)}
+              {ensName?.ensName || shortenAddress(owner ? getAddress(owner) : ethers.constants.AddressZero, 4)}
             </div>
           </div>
         </div>
@@ -210,6 +209,45 @@ const CurrentAuction = ({
   tokenName: string;
 }) => {
   const [theme] = useTheme();
+  const { data: ensName } = useEnsName(auctionInfo?.highestBidder);
+
+  // leilão finalizado - aguardando settle
+  if ((auctionInfo?.endTime || 0) < Math.round(Date.now() / 1000)) {
+    return (
+      <Fragment>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mt-10 lg:w-96 pb-8 lg:pb-0">
+          <div className="lg:border-r mr-8 lg:mr-0 border-skin-stroke">
+            <div className="text-lg text-skin-muted">{"Winning Bid"}</div>
+            {auctionInfo ? (
+              <div className="text-2xl font-semibold sm:text-3xl text-skin-base mt-2">
+                Ξ {utils.formatEther(auctionInfo.highestBid || "0")}
+              </div>
+            ) : (
+              <div className="text-2xl font-semibold sm:text-3xl text-skin-base mt-2">
+                n/a
+              </div>
+            )}
+          </div>
+          <div className="lg:w-64">
+            <div className="text-lg text-skin-muted">{"Held by"}</div>
+  
+            <div className="flex items-center mt-2">
+              <UserAvatar
+                diameter={32}
+                className="w-8 h-8 rounded-full mr-2"
+                address={auctionInfo?.highestBidder || ethers.constants.AddressZero}
+              />
+              <div className="text-xl font-semibold sm:text-3xl text-skin-base">
+                {ensName?.ensName || shortenAddress(auctionInfo?.highestBidder ? getAddress(auctionInfo?.highestBidder) : ethers.constants.AddressZero, 4)}
+              </div>
+            </div>
+          </div>
+        </div>
+        <SettleAuction auction={contractInfo?.auction} />
+        <BidHistory bids={auctionInfo?.bids} numToShow={bidsShow} title="Last Bids" imgsrc={tokenImg.replace("api.zora.co", "nouns.build/api")} tokenName={tokenName || "0"} />
+      </Fragment>
+    )
+  }
 
   return (
     <Fragment>
@@ -235,16 +273,11 @@ const CurrentAuction = ({
           )}
         </div>
       </div>
-
-      {(auctionInfo?.endTime || 0) < Math.round(Date.now() / 1000) ? (
-        <SettleAuction auction={contractInfo?.auction} />
-      ) : (
-        <PlaceBid
-          highestBid={auctionInfo?.highestBid || "0"}
-          auction={contractInfo?.auction}
-          tokenId={tokenId}
-        />
-      )}
+      <PlaceBid
+        highestBid={auctionInfo?.highestBid || "0"}
+        auction={contractInfo?.auction}
+        tokenId={tokenId}
+      />
 
       {/*auctionInfo?.highestBidder &&
         !compareAddress(
