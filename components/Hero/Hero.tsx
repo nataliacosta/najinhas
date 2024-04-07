@@ -20,7 +20,7 @@ import { useRouter } from "next/router";
 import BidHistory from "./BidHistory";
 
 // number of bids in history before full history button
-const bidsShow = 1;
+const bidsShow = 2;
 
 export default function Hero() {
   const { data: contractInfo } = useContractInfo();
