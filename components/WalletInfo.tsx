@@ -12,21 +12,21 @@ export const WalletInfo = ({ address }: { address?: `0x${string}` }) => {
 
   if (!address) return <Fragment />;
 
-  const name = useMemo(() => {
+  const name = () => {
     if (ensName?.ensName) {
       const name = ensName?.ensName;
       return name;
     } else {
       return shortenAddress(address ? getAddress(address) : ethers.constants.AddressZero, 4);
     }
-  }, [address, ensName, size]);
+  };
 
   return (
     <div className="flex items-center">
     <div className="flex items-center mt-2">
         <UserAvatar className="h-6 rounded-full mr-2" address={address} />
         <div className="text-skin-base ">
-          {name}
+          {name()}
         </div>
     </div>
     </div>
