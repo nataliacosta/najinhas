@@ -244,8 +244,10 @@ const CurrentAuction = ({
           </div>
         </div>
         <SettleAuction auction={contractInfo?.auction} />
-        <BidHistory bids={auctionInfo?.bids} numToShow={bidsShow} title="Last Bids" imgsrc={tokenImg.replace("api.zora.co", "nouns.build/api")} tokenName={tokenName || "0"} />
-      </Fragment>
+        {auctionInfo && auctionInfo.bids && auctionInfo.bids.length > 0 && (
+          <BidHistory bids={auctionInfo?.bids} numToShow={bidsShow} title="Last Bids" imgsrc={tokenImg.replace("api.zora.co", "nouns.build/api")} tokenName={tokenName || "0"} />
+        )}
+        </Fragment>
     )
   }
 
@@ -279,13 +281,9 @@ const CurrentAuction = ({
         tokenId={tokenId}
       />
 
-      {/*auctionInfo?.highestBidder &&
-        !compareAddress(
-          auctionInfo?.highestBidder,
-          ethers.constants.AddressZero
-        ) && <HighestBidder address={auctionInfo?.highestBidder} />*/}
-
+      {auctionInfo && auctionInfo.bids && auctionInfo.bids.length > 0 && (
         <BidHistory bids={auctionInfo?.bids} numToShow={bidsShow} title="Last Bids" imgsrc={tokenImg.replace("api.zora.co", "nouns.build/api")} tokenName={tokenName} />
+      )}
     </Fragment>
   );
 };
